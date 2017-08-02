@@ -18,6 +18,11 @@ lr = LogisticRegression()
 class Iris:
     
     def __init__(self):
+        '''
+        Initiates the Iris object with four class variables
+        X_train, X_test, y_train and y_test
+        
+        '''
         self.X_train, \
         self.X_test, \
         self.y_train, \
@@ -27,12 +32,30 @@ class Iris:
                                        random_state = 42)
         
     def k_means_labels(self):
+        '''
+        Creates two class variables containing cluster labels obtained 
+        from k-means clustering for train data and test data respectively
+        
+        '''
         km = KMeans(n_clusters = 3, 
                     init = 'k-means++').fit(self.X_train)
         self.train_labels = km.labels_
         self.test_labels = km.predict(self.X_test)
         
     def predict(self, model = lr, type = None):
+        '''
+        Fits the data in the given model (Default model is Logistic regression),
+        makes a prediction and returns the accuracy value for the model
+        Parameters
+        ----------
+        model: Default - LogisticRegression
+               Classification is performed on the given model
+        
+        type: string value
+              Default- None
+              Mentions wether to use just cluster labels, input features or both
+              for training the model
+        '''
         if type == None:
             model.fit(self.X_train, self.y_train)
             return accuracy_score(model.predict(self.X_test), self.y_test)
