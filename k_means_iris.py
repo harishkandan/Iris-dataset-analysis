@@ -55,6 +55,9 @@ class Iris:
               Default- None
               Mentions wether to use just cluster labels, input features or both
               for training the model
+        Return
+        ------
+        accuracy score for that model
         '''
         if type == None:
             model.fit(self.X_train, self.y_train)
